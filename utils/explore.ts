@@ -1,10 +1,10 @@
-import { BreastCancerDataProps } from "@/interfaces/page";
+import { AlsCompoundsDataProps } from "@/interfaces/page";
 
 interface FormattedData {
 	[key: string]: string[];
 }
 
-export const formatData = (data: BreastCancerDataProps[]): FormattedData => {
+export const formatData = (data: AlsCompoundsDataProps[]): FormattedData => {
 	const result: FormattedData = {};
 
 	// T.C - O(n^2)
