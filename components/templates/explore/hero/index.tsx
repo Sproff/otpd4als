@@ -14,7 +14,7 @@ import {
 import { useDebounce } from "@/hooks/debounce/useDebounce";
 import { ChartData, ChartOptions } from "@/interfaces/chart";
 import { AlsCompoundsDataProps } from "@/interfaces/page";
-import { IGenomicProps } from "@/interfaces/tableDefinitions";
+import { IAlsProps } from "@/interfaces/tableDefinitions";
 import { CustomTableLayout } from "@/layouts/TableLayout";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatData } from "@/utils/explore";
@@ -33,7 +33,7 @@ const Hero = () => {
 		q: `${timedValue}`,
 	});
 
-	const genomicColumn: ColumnDef<IGenomicProps>[] = [
+	const alsColumn: ColumnDef<IAlsProps>[] = [
 		{
 			accessorKey: "canonicalSmiles",
 			size: 10,
@@ -236,7 +236,7 @@ const Hero = () => {
 											Tabular Visualization
 										</Text>
 										<CustomTableLayout
-											{...{ columns: genomicColumn, data: tableData }}
+											{...{ columns: alsColumn, data: tableData }}
 										/>
 									</Box>
 								) : (

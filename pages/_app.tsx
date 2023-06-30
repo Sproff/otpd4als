@@ -38,10 +38,10 @@ const App = ({ Component, pageProps }: AppProps) => {
 				<ReactQueryDevtools initialIsOpen={false} />
 				<ChakraProvider theme={customTheme}>
 					<Head>
-						<title>Genomic data visualization</title>
+						<title>ALS Data Revolution: Unleash the Cure</title>
 						<meta
 							name="description"
-							content="Genomic data visualization | Creating visual representations of genomic data, such as DNA sequences, genetic mutations, and gene expression patterns. Explore diverse genomic datasets to identify potential biomarkers and treatment targets. Regularly updated."
+							content="Discover groundbreaking advancements in ALS drug discovery."
 						/>
 						<meta name="robots" content="all" />
 						<meta

@@ -1,4 +1,4 @@
-export interface IGenomicProps {
+export interface IAlsProps {
 	id: string;
 	commonName: string;
 	description: string;

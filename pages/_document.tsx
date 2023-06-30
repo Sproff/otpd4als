@@ -1,9 +1,9 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
-const GenomicBreastCancer = () => {
-	const title = "Genomic data visualization";
+const AlsCompound = () => {
+	const title = "ALS Data Revolution: Unleash the Cure";
 	const description =
-		"Genomic data visualization | Creating visual representations of genomic data, such as DNA sequences, genetic mutations, and gene expression patterns. Explore diverse genomic datasets to identify potential biomarkers and treatment targets. Regularly updated.";
+		"Discover groundbreaking advancements in ALS drug discovery.";
 	const ogImageUrl = "/og-image.png";
 	const twitterHandle = "@dev_sproff";
 
@@ -42,7 +42,10 @@ const GenomicBreastCancer = () => {
 				/>
 				<link rel="manifest" href="/site.webmanifest" />
 
-				<link rel="canonical" href="https://genomic-breast-cancer.vercel.app" />
+				<link
+					rel="canonical"
+					href="https://als-druglike-compounds.vercel.app"
+				/>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link
 					rel="preconnect"
@@ -60,7 +63,7 @@ const GenomicBreastCancer = () => {
 				<meta property="og:image" content={ogImageUrl} />
 				<meta
 					property="og:url"
-					content="https://genomic-data-visualization.vercel.app"
+					content="https://als-druglike-compounds.vercel.app"
 				/>
 				<meta property="og:type" content="website" />
 				<meta property="og:image" content={ogImageUrl} />
@@ -80,4 +83,4 @@ const GenomicBreastCancer = () => {
 	);
 };
 
-export default GenomicBreastCancer;
+export default AlsCompound;

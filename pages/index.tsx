@@ -8,16 +8,15 @@ const Home: NextPage = () => {
 	return (
 		<Box>
 			<Head>
-				<title>Genomic data visualization</title>
+				<title>ALS Data Revolution: Unleash the Cure</title>
 				<meta
 					name="description"
-					content="Genomic data visualization | Creating visual representations of genomic data, such as DNA sequences, genetic mutations, and gene expression patterns. Explore diverse genomic datasets to identify potential biomarkers and treatment targets. Regularly updated."
+					content="Discover groundbreaking advancements in ALS drug discovery."
 				/>
 			</Head>
 
 			<MainLayout>
 				<Hero />
-				{/* <Features /> */}
 				<About />
 			</MainLayout>
 		</Box>
