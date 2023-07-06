@@ -1,4 +1,8 @@
-import { getAlsCompounds, getSingleAlsCompound } from "@/queries/alsCompound";
+import {
+	getAlsCompounds,
+	getParticularAlsCompounds,
+	getSingleAlsCompound,
+} from "@/queries/alsCompound";
 import { useQuery } from "@tanstack/react-query";
 import { createQueryFilterStrings } from "@/utils/helpers";
 
@@ -10,7 +14,17 @@ export const useGetAllCompounds = () => {
 	});
 };
 
-export const useGetSingleBreastCancer = (filter?: Record<string, string>) => {
+export const useGetParticularAlsCompound = (
+	id: string | string[] | undefined
+) => {
+	return useQuery({
+		queryKey: ["getParticularAlsCompound", id],
+		queryFn: () => getParticularAlsCompounds(id),
+		retry: 2,
+	});
+};
+
+export const useGetSingleAlsCompounds = (filter: Record<string, string>) => {
 	const queryFilters = encodeURI(createQueryFilterStrings(filter));
 	return useQuery({
 		queryKey: ["getSingleCompound", queryFilters],

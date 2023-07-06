@@ -5,6 +5,13 @@ export const getAlsCompounds = async () => {
 	return data;
 };
 
+export const getParticularAlsCompounds = async (
+	id: string | string[] | undefined
+) => {
+	const { data } = await AxiosInstance.get(`/als-compounds/${id}`);
+	return data;
+};
+
 export const getSingleAlsCompound = async ({
 	queryFilters,
 }: {

@@ -9,7 +9,7 @@ import { PieChart } from "@/components/ui/charts/PieChart";
 import { Input } from "@/components/ui/forms/Input";
 import {
 	useGetAllCompounds,
-	useGetSingleBreastCancer,
+	useGetSingleAlsCompounds,
 } from "@/hooks/compounds/useAlsCompound";
 import { useDebounce } from "@/hooks/debounce/useDebounce";
 import { ChartData, ChartOptions } from "@/interfaces/chart";
@@ -19,17 +19,19 @@ import { CustomTableLayout } from "@/layouts/TableLayout";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatData } from "@/utils/explore";
 import { Fragment, useMemo, useState } from "react";
+import { AiFillEye } from "react-icons/ai";
+import Link from "next/link";
 
 const Hero = () => {
 	const [inputSearch, setInputSearch] = useState("");
 	const timedValue = useDebounce(inputSearch, 1000);
-	const { data: alsCompoundData, isLoading: alsCompoundDataIsloading } =
+	const { data: alsCompoundsData, isLoading: alsCompoundsDataIsloading } =
 		useGetAllCompounds();
 
 	const {
 		data: singleAlsCompoundData,
 		isLoading: singleAlsCompoundDataIsLoading,
-	} = useGetSingleBreastCancer({
+	} = useGetSingleAlsCompounds({
 		q: `${timedValue}`,
 	});
 
@@ -47,33 +49,33 @@ const Hero = () => {
 			},
 		},
 		{
-			accessorKey: "formula",
+			accessorKey: "esolClass",
 			size: 10,
 			cell: ({ getValue }) => {
 				return (
-					<HStack>
+					<HStack justify="center">
 						<Text>{getValue() as unknown as string}</Text>
 					</HStack>
 				);
 			},
 		},
 		{
-			accessorKey: "molecularWeight",
+			accessorKey: "bbbPermeant",
 			size: 10,
 			cell: ({ getValue }) => {
 				return (
-					<HStack>
+					<HStack justify="center">
 						<Text>{getValue() as unknown as string}</Text>
 					</HStack>
 				);
 			},
 		},
 		{
-			accessorKey: "molarRefractivity",
+			accessorKey: "giAbsorption",
 			size: 10,
 			cell: ({ getValue }) => {
 				return (
-					<HStack>
+					<HStack justify="center">
 						<Text textTransform="capitalize">
 							{getValue() as unknown as string}
 						</Text>
@@ -82,39 +84,62 @@ const Hero = () => {
 			},
 		},
 		{
-			accessorKey: "bbbPermeant",
+			accessorKey: "cyp2d6Inhibitor",
 			size: 10,
-
-			cell: (info) => info.getValue(),
+			cell: ({ getValue }) => {
+				return (
+					<HStack justify="center">
+						<Text textTransform="capitalize">
+							{getValue() as unknown as string}
+						</Text>
+					</HStack>
+				);
+			},
 		},
 		{
 			accessorKey: "lipinski",
 			size: 10,
 			cell: ({ getValue }) => {
 				return (
-					<HStack>
+					<HStack justify="center">
 						<Text>{getValue() as unknown as string}</Text>
 					</HStack>
+				);
+			},
+		},
+		{
+			accessorKey: "Actions",
+			size: 10,
+			cell: ({ row }) => {
+				return (
+					<Link href={`/explore/${row?.original?.id}`}>
+						<HStack cursor="pointer" justify="center">
+							<AiFillEye />
+						</HStack>
+					</Link>
 				);
 			},
 		},
 	];
 
 	const tableData = useMemo(() => {
-		return (alsCompoundData && singleAlsCompoundData)?.data?.alsCompounds?.map(
-			(item: AlsCompoundsDataProps) => ({
-				id: item._id,
-				canonicalSmiles: item.canonicalSmiles,
-				formula: item.formula,
-				molecularWeight: item.molecularWeight,
-				molarRefractivity: item.molarRefractivity,
-				bbbPermeant: item.bbbPermeant,
-				lipinski: item.lipinski,
-			})
+		return (
+			alsCompoundsData &&
+			singleAlsCompoundData?.data?.alsCompounds?.map(
+				(item: AlsCompoundsDataProps) => ({
+					id: item._id,
+					canonicalSmiles: item.canonicalSmiles,
+					esolClass: item.esolClass,
+					bbbPermeant: item.bbbPermeant,
+					giAbsorption: item.giAbsorption,
+					cyp2d6Inhibitor: item.cyp2d6Inhibitor,
+					lipinski: item.lipinski,
+				})
+			)
 		);
-	}, [alsCompoundData, singleAlsCompoundData]);
+	}, [alsCompoundsData, singleAlsCompoundData]);
 
-	const pieChartFormattedData = formatData(alsCompoundData?.data?.alsCompound);
+	const pieChartFormattedData = formatData(alsCompoundsData?.data?.alsCompound);
 
 	const chartDataPie: ChartData = {
 		labels: [
@@ -213,19 +238,19 @@ const Hero = () => {
 						w={["100%", "100%", "90%", "70%"]}
 						mt=".5rem"
 					>
-						Note: You can search based on either commonName, geneId,
-						orientation, symbol, taxId, taxname, type
+						Note: You can search based on either canonicalSmiles, esolClass,
+						bbbPermeant, giAbsorption, cyp2d6Inhibitor, lipinski
 					</Text>
 				</Box>
 			</Box>
 			<Box bg="brand.white300">
 				<Box maxW="1200px" mx="auto" px="2rem" py="2rem">
 					<Box>
-						{alsCompoundDataIsloading || singleAlsCompoundDataIsLoading ? (
+						{alsCompoundsDataIsloading || singleAlsCompoundDataIsLoading ? (
 							<TableLoader />
 						) : (
 							<Fragment>
-								{alsCompoundData?.data?.breastCancers?.length !== 0 ? (
+								{alsCompoundsData?.data?.alsCompounds?.length !== 0 ? (
 									<Box>
 										<Text
 											fontSize="2rem"
@@ -241,14 +266,14 @@ const Hero = () => {
 									</Box>
 								) : (
 									<Center>
-										<Text>No data available, Check back later!</Text>
+										<Text py="5rem">No data available, Check back later!</Text>
 									</Center>
 								)}
 							</Fragment>
 						)}
 					</Box>
 
-					{alsCompoundDataIsloading || singleAlsCompoundDataIsLoading ? (
+					{alsCompoundsDataIsloading || singleAlsCompoundDataIsLoading ? (
 						<Center mt="8rem">
 							<VStack w="100%">
 								<TextLoader />

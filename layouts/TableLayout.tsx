@@ -12,16 +12,16 @@ import {
 	Thead,
 	Tr,
 	Center,
+	Select,
 } from "@chakra-ui/react";
 import {
 	flexRender,
 	useReactTable,
 	getCoreRowModel,
-	PaginationState,
-	ExpandedState,
-	getExpandedRowModel,
+	getFilteredRowModel,
+	getPaginationRowModel,
 } from "@tanstack/react-table";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const Table = chakra(CTable);
@@ -34,38 +34,23 @@ const TableD = chakra(Td);
 const CustomTableLayout = (props: any) => {
 	const data = useMemo(() => props.data, [props.data]);
 	const columns = useMemo(() => props.columns, [props.columns]);
-	const [rowSelection, setRowSelection] = useState({});
-
-	const [{ pageIndex, pageSize }] = useState<PaginationState>({
-		pageIndex: 0,
-		pageSize: 10,
-	});
-	const [expanded, setExpanded] = React.useState<ExpandedState>({});
-
-	const pagination = React.useMemo(
-		() => ({
-			pageIndex,
-			pageSize,
-		}),
-		[pageIndex, pageSize]
-	);
 
 	const {
 		getHeaderGroups,
 		getRowModel,
 		getPageCount,
+		getState,
 		getCanNextPage,
 		nextPage,
 		getCanPreviousPage,
 		previousPage,
+		setPageSize,
 	} = useReactTable({
 		columns,
 		data,
-		state: { expanded, pagination, rowSelection },
 		getCoreRowModel: getCoreRowModel(),
-		getExpandedRowModel: getExpandedRowModel(),
-		onRowSelectionChange: setRowSelection,
-		onExpandedChange: setExpanded,
+		getFilteredRowModel: getFilteredRowModel(),
+		getPaginationRowModel: getPaginationRowModel(),
 	});
 
 	return (
@@ -147,64 +132,60 @@ const CustomTableLayout = (props: any) => {
 						justify={"space-between"}
 						w={"full"}
 					>
-						<Box>
-							<Text fontSize={["1.2rem", "1.2rem", "1.2rem", "1.4rem"]}>
-								Showing{" "}
-								{props.currentPage === 1 ? "1" : `${pageSize * pageIndex + 1}`}{" "}
-								- {pageIndex === 0 ? data.length : props.count} of {data.length}{" "}
-								result(s)
+						<HStack fontSize={["1.2rem", "1.2rem", "1.2rem", "1.4rem"]}>
+							<Text>
+								Showing page {getState().pagination.pageIndex + 1} of{" "}
+								{getPageCount()} result(s)
 							</Text>
-						</Box>
 
-						<HStack spacing={"1rem"}>
+							<Box>
+								<Select
+									border="1px solid"
+									borderRadius=".5rem"
+									px=".5rem"
+									cursor="pointer"
+									value={getState().pagination.pageSize}
+									onChange={(e) => {
+										setPageSize(Number(e.target.value));
+									}}
+									_focusVisible={{ border: "none", borderColor: "transparent" }}
+								>
+									{[10, 20, 30, 40, 50].map((pageSize) => (
+										<option key={pageSize} value={pageSize}>
+											Show {pageSize}
+										</option>
+									))}
+								</Select>
+							</Box>
+						</HStack>
+
+						<HStack spacing={"2rem"}>
 							<Circle
 								onClick={() => previousPage()}
-								size={"3.5rem"}
-								fontSize={"2.5rem"}
+								size="3.5rem"
+								fontSize="2.5rem"
 								as={IconButton}
 								icon={<FiChevronLeft />}
 								aria-label="prev"
-								rounded={"full"}
-								bg={"none"}
-								disabled={!getCanPreviousPage()}
-								colorScheme={"none"}
-								color={"brand.gray100"}
+								rounded="full"
+								bg="brand.dark200"
+								color="brand.white100"
+								_hover={{ bg: "brand.dark200" }}
+								isDisabled={!getCanPreviousPage()}
 							/>
-							{[...Array.from({ length: getPageCount() }, (_, v) => v + 1)].map(
-								(no: number) => {
-									return (
-										<Circle
-											key={no}
-											size={"3.5rem"}
-											cursor={"pointer"}
-											{...(no === props.currentPage
-												? {
-														bg: "brand.dark100",
-														color: "brand.white100",
-												  }
-												: {
-														bg: "brand.dark100",
-														color: "brand.white100",
-												  })}
-										>
-											{no}
-										</Circle>
-									);
-								}
-							)}
 
 							<Circle
 								onClick={() => nextPage()}
 								as={IconButton}
 								icon={<FiChevronRight />}
-								fontSize={"2.5rem"}
+								fontSize="2.5rem"
 								aria-label="next"
-								rounded={"full"}
+								rounded="full"
 								size="3.5rem"
-								bg={"none"}
-								colorScheme={"none"}
-								color={"brand.gray100"}
-								disabled={!getCanNextPage()}
+								bg="brand.dark200"
+								color="brand.white100"
+								_hover={{ bg: "brand.dark200" }}
+								isDisabled={!getCanNextPage()}
 							/>
 						</HStack>
 					</HStack>
