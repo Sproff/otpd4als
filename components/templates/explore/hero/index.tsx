@@ -263,8 +263,8 @@ const Hero = () => {
 						w={["100%", "100%", "90%", "70%"]}
 						mt=".5rem"
 					>
-						Note: You can search based on either canonicalSmiles, esolClass,
-						bbbPermeant, giAbsorption, cyp2d6Inhibitor, lipinski
+						Note: You can search based on either molecule, canonicalSmiles,
+						esolClass, bbbPermeant, giAbsorption, cyp2d6Inhibitor, lipinski
 					</Text>
 				</Box>
 			</Box>
