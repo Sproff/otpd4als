@@ -37,12 +37,36 @@ const Hero = () => {
 
 	const alsColumn: ColumnDef<IAlsProps>[] = [
 		{
+			accessorKey: "s/n",
+			size: 10,
+
+			cell: ({ row }) => {
+				return (
+					<HStack overflowX="scroll">
+						<Text>{row?.id}</Text>
+					</HStack>
+				);
+			},
+		},
+		{
+			accessorKey: "molecule",
+			size: 10,
+
+			cell: ({ getValue }) => {
+				return (
+					<HStack w="150px" overflowX="scroll">
+						<Text>{getValue() as unknown as string}</Text>
+					</HStack>
+				);
+			},
+		},
+		{
 			accessorKey: "canonicalSmiles",
 			size: 10,
 
 			cell: ({ getValue }) => {
 				return (
-					<HStack w="350px" overflowX="scroll">
+					<HStack w="300px" overflowX="scroll">
 						<Text>{getValue() as unknown as string}</Text>
 					</HStack>
 				);
@@ -128,6 +152,7 @@ const Hero = () => {
 			singleAlsCompoundData?.data?.alsCompounds?.map(
 				(item: AlsCompoundsDataProps) => ({
 					id: item._id,
+					molecule: item.molecule,
 					canonicalSmiles: item.canonicalSmiles,
 					esolClass: item.esolClass,
 					bbbPermeant: item.bbbPermeant,

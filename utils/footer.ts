@@ -5,7 +5,7 @@ export const SocialLinks: FooterProps[] = [
 	{
 		name: "GitHub",
 		icon: BsGithub,
-		url: "https://github.com/Sproff",
+		url: "https://github.com/Sproff/als-druglike-compounds",
 	},
 	{
 		name: "LinkedIn",

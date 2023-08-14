@@ -16,8 +16,6 @@ const AlsCompoundDetails = () => {
 	const { data: alsCompoundData, isLoading: alsCompoundDataIsloading } =
 		useGetParticularAlsCompound(query?.slug);
 
-	console.log("alsCompoundData", alsCompoundData);
-
 	return (
 		<Box>
 			<Box
@@ -484,7 +482,7 @@ const AlsCompoundDetails = () => {
 										fontWeight="500"
 									>
 										<Box as="span" flex="1" textAlign="left" fontWeight="700">
-											{alsCompoundData?.data?.alsCompound?.molecule}
+											{alsCompoundData?.data?.alsCompound?.molecule || "N/A"}
 										</Box>
 										<AccordionIcon />
 									</AccordionButton>
@@ -494,25 +492,27 @@ const AlsCompoundDetails = () => {
 									<Text mt="1rem" fontWeight="600">
 										Mechanism Of Action:{" "}
 										<Box as="span" fontWeight="300">
-											{alsCompoundData?.data?.alsCompound?.mechanismOfAction}
+											{alsCompoundData?.data?.alsCompound?.mechanismOfAction ||
+												"N/A"}
 										</Box>
 									</Text>
 									<Text mt="1rem" fontWeight="600">
 										Target Name:{" "}
 										<Box as="span" fontWeight="300">
-											{alsCompoundData?.data?.alsCompound?.targetName}
+											{alsCompoundData?.data?.alsCompound?.targetName || "N/A"}
 										</Box>
 									</Text>
 									<Text mt="1rem" fontWeight="600">
 										Human Targets:{" "}
 										<Box as="span" fontWeight="300">
-											{alsCompoundData?.data?.alsCompound?.humanTargets}
+											{alsCompoundData?.data?.alsCompound?.humanTargets ||
+												"N/A"}
 										</Box>
 									</Text>
 									<Text mt="1rem" fontWeight="600">
 										References:{" "}
 										<Box as="span" fontWeight="300">
-											{alsCompoundData?.data?.alsCompound?.references}
+											{alsCompoundData?.data?.alsCompound?.references || "N/A"}
 										</Box>
 									</Text>
 								</AccordionPanel>
