@@ -21,7 +21,7 @@ export const Input = ({
 				<CInput
 					id={id}
 					defaultValue={value}
-					placeholder="Search based on either canonicalSmiles, esolClass, bbbPermeant, giAbsorption, cyp2d6Inhibitor, lipinski"
+					placeholder="Search based on either molecule, canonicalSmiles, esolClass, bbbPermeant, giAbsorption, cyp2d6Inhibitor, lipinski"
 					type="text"
 					bg={bg || ""}
 					color={color || "brand.gray100"}
