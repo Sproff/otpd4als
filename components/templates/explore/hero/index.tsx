@@ -164,10 +164,13 @@ const Hero = () => {
 		);
 	}, [alsCompoundsData, singleAlsCompoundData]);
 
-	const pieChartFormattedData = formatData(alsCompoundsData?.data?.alsCompound);
+	const pieChartFormattedData = formatData(
+		alsCompoundsData?.data?.alsCompounds
+	);
 
 	const chartDataPie: ChartData = {
 		labels: [
+			"Molecule",
 			"Canonical Smiles",
 			"Formula",
 			"Molecular Weight",
@@ -179,6 +182,7 @@ const Hero = () => {
 			{
 				label: "# of Data",
 				data: [
+					pieChartFormattedData.molecule?.length?.toString(),
 					pieChartFormattedData.canonicalSmiles?.length?.toString(),
 					pieChartFormattedData.formula?.length?.toString(),
 					pieChartFormattedData.molecularWeight?.length?.toString(),
@@ -187,20 +191,22 @@ const Hero = () => {
 					pieChartFormattedData.lipinski?.length?.toString(),
 				],
 				backgroundColor: [
+					"rgba(75, 192, 192, 0.2)",
 					"rgba(255, 99, 132, 0.2)",
 					"rgba(54, 162, 235, 0.2)",
 					"rgba(255, 206, 86, 0.2)",
 					"rgba(75, 192, 192, 0.2)",
-					"rgba(153, 102, 255, 0.2)",
+					"rgba(158, 12, 55, 0.2)",
 					"rgba(13, 02, 225, 0.2)",
 					"rgba(255, 159, 64, 0.2)",
 				],
 				borderColor: [
+					"rgba(75, 192, 192, 1)",
 					"rgba(255, 99, 132, 1)",
 					"rgba(54, 162, 235, 1)",
 					"rgba(255, 206, 86, 1)",
 					"rgba(75, 192, 192, 1)",
-					"rgba(153, 102, 255, 1)",
+					"rgba(158, 12, 55, 1)",
 					"rgba(13, 02, 225, 1)",
 					"rgba(255, 159, 64, 1)",
 				],

@@ -19,9 +19,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 > Amyotrophic Lateral Sclerosis repository is a specialized collection of data and resources specifically focused on Amyotrophic Lateral Sclerosis (ALS). It serves as a central repository or storage system for various types of information related to ALS.
 
-View the live project - [Click here](https://als-druglike-compounds.vercel.app)
+View the live project - [Click here](https://otpd4als.vercel.app)
 
-View the backend of this project - [Click here](https://github.com/Sproff/als-druglike-compounds-api)
+View the backend of this project - [Click here](https://github.com/Sproff/open-targets-potential-drugs-for-amyotrophic-lateral-sclerosis-api)
 
 This project will be updated on a regular basis. Feel free to make a Pull Request(PR).
 

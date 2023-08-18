@@ -6,6 +6,7 @@ import {
 	AccordionItem,
 	AccordionPanel,
 	Box,
+	Link,
 	Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -488,34 +489,60 @@ const AlsCompoundDetails = () => {
 									</AccordionButton>
 								</h2>
 
-								<AccordionPanel pb={4} fontWeight="400" fontSize="1.5rem">
-									<Text mt="1rem" fontWeight="600">
-										Mechanism Of Action:{" "}
-										<Box as="span" fontWeight="300">
-											{alsCompoundData?.data?.alsCompound?.mechanismOfAction ||
-												"N/A"}
-										</Box>
+								{alsCompoundData?.data?.alsCompound?.mechanismOfAction ? (
+									<AccordionPanel pb={4} fontWeight="400" fontSize="1.5rem">
+										<Text mt="1rem" fontWeight="600">
+											Mechanism Of Action:{" "}
+											<Box as="span" fontWeight="300">
+												{alsCompoundData?.data?.alsCompound
+													?.mechanismOfAction || "N/A"}
+											</Box>
+										</Text>
+										<Text mt="1rem" fontWeight="600">
+											Target Name:{" "}
+											<Box as="span" fontWeight="300">
+												{alsCompoundData?.data?.alsCompound?.targetName ||
+													"N/A"}
+											</Box>
+										</Text>
+										<Text mt="1rem" fontWeight="600">
+											Human Targets:{" "}
+											<Box as="span" fontWeight="300">
+												{alsCompoundData?.data?.alsCompound?.humanTargets ||
+													"N/A"}
+											</Box>
+										</Text>
+										<Text mt="1rem" fontWeight="600">
+											References:{" "}
+											<Box as="span" fontWeight="300">
+												{alsCompoundData?.data?.alsCompound?.references ||
+													"N/A"}
+											</Box>
+										</Text>
+									</AccordionPanel>
+								) : (
+									<Text p="1rem" lineHeight="2.5rem">
+										You can predict the target for this compound by copying the
+										canonical SMILES and conducting a thorough search on
+										reputable platforms such as{" "}
+										<Link
+											textDecoration="underline"
+											href="http://www.swisstargetprediction.ch"
+											isExternal
+										>
+											SwisTargetPrediction
+										</Link>{" "}
+										or{" "}
+										<Link
+											textDecoration="underline"
+											href="https://sea.bkslab.org"
+											isExternal
+										>
+											Sea.bkslab.org
+										</Link>
+										.
 									</Text>
-									<Text mt="1rem" fontWeight="600">
-										Target Name:{" "}
-										<Box as="span" fontWeight="300">
-											{alsCompoundData?.data?.alsCompound?.targetName || "N/A"}
-										</Box>
-									</Text>
-									<Text mt="1rem" fontWeight="600">
-										Human Targets:{" "}
-										<Box as="span" fontWeight="300">
-											{alsCompoundData?.data?.alsCompound?.humanTargets ||
-												"N/A"}
-										</Box>
-									</Text>
-									<Text mt="1rem" fontWeight="600">
-										References:{" "}
-										<Box as="span" fontWeight="300">
-											{alsCompoundData?.data?.alsCompound?.references || "N/A"}
-										</Box>
-									</Text>
-								</AccordionPanel>
+								)}
 							</AccordionItem>
 						</Accordion>
 					</Box>
