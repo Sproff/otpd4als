@@ -15,6 +15,10 @@ const About = () => {
 				</Text>
 
 				<Box mt="5rem">
+					<Text fontSize={["1.6rem", "1.6rem", "1.7rem"]} mb="2rem">
+						OTPD4ALS stands for Open Targets Potential Drugs for Amyotrophic
+						Lateral Sclerosis.
+					</Text>
 					<Text fontSize={["1.6rem", "1.6rem", "1.7rem"]}>
 						We are a passionate team of scientists and innovators dedicated to
 						empowering the ALS research community. Our advanced database serves
