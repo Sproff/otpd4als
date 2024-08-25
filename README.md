@@ -21,7 +21,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 View the live project - [Click here](https://otpd4als.vercel.app)
 
-View the backend of this project - [Click here](https://github.com/Sproff/open-targets-potential-drugs-for-amyotrophic-lateral-sclerosis-api)
+View the backend of this project - [Click here](https://github.com/Sproff/otpd4als-api)
 
 This project will be updated on a regular basis. Feel free to make a Pull Request(PR).
 
