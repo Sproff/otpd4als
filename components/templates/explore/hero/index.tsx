@@ -52,11 +52,19 @@ const Hero = () => {
 			accessorKey: "molecule",
 			size: 10,
 
-			cell: ({ getValue }) => {
+			cell: ({ getValue, row }) => {
 				return (
-					<HStack w="150px" overflowX="scroll">
-						<Text>{getValue() as unknown as string}</Text>
-					</HStack>
+					<Link href={`/explore/${row?.original?.id}`}>
+						<HStack
+							w="150px"
+							overflowX="scroll"
+							_hover={{
+								textDecoration: "underline",
+							}}
+						>
+							<Text>{getValue() as unknown as string}</Text>
+						</HStack>
+					</Link>
 				);
 			},
 		},

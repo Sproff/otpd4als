@@ -75,7 +75,7 @@ const CustomTableLayout = (props: any) => {
 										{headerGroup.headers.map((Hcolumn) => (
 											<TableH
 												key={Hcolumn.id}
-												w={`${Hcolumn.getSize()}rem` ?? "auto"}
+												w={`${Hcolumn.getSize()}rem` || "auto"}
 												py={"2rem"}
 												color={"brand.gray100"}
 												fontFamily="'Syne', sans-serif"
@@ -104,7 +104,7 @@ const CustomTableLayout = (props: any) => {
 											return (
 												<TableD
 													key={cell.id}
-													w={`${cell.column.getSize()}rem` ?? "auto"}
+													w={`${cell.column.getSize()}rem` || "auto"}
 													lineHeight={"1.8rem"}
 													py="1rem"
 													fontWeight="400"
